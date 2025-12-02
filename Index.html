@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Gourmet | Experiencias Culinarias Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variables y Reset */
+        :root {
+            --color-primary: #a30000; /* Rojo Borgoña Profundo */
+            --color-secondary: #ff5733; /* Naranja/Rojo Vivo para acentos */
+            --color-dark: #1a1a1a;
+            --color-light: #f9f9f9;
+            --color-text: #4a4a4a;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--color-light);
+        }
+
+        /* --- Encabezado y Navegación --- */
+        .header {
+            background-color: var(--color-dark);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-light);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo .icon {
+            color: var(--color-primary);
+            margin-right: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-light);
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            /* ... (estilos para móvil, ver media query) ... */
+        }
+
+        /* --- Sección Hero --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://picsum.photos/1920/1080?culinary') center center / cover no-repeat fixed; /* Imagen de fondo simulada con efecto 'fixed' */
+            background-color: var(--color-dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 6rem; /* Espacio para el header fijo */
+            background-attachment: scroll; /* Cambiado a scroll para la demostración, para parallax real necesitarías JS */
+        }
+        
+        /* Efecto Sutil de Parallax (requiere un poco más de código, pero esta es la base) */
+        .hero {
+            background-attachment: fixed; /* Habilitar Parallax */
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-display);
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.1;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-family: var(--font-body);
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInDown 1s ease 0.3s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn:hover {
+            background: white;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            border-color: white;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* --- Secciones Generales --- */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            text-align: center;
+            font-size: 3rem;
+            color: var(--color-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+             text-align: center;
+             font-family: var(--font-body);
+             font-size: 1.1rem;
+             color: var(--color-text);
+             margin-bottom: 4rem;
+             position: relative;
+        }
+        
+        .section-subtitle::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--color-secondary);
+            margin: 1rem auto 0;
+        }
+
+        /* --- Sobre Mí --- */
+        .about {
+            background: var(--color-light);
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            min-width: 40%;
+            height: 450px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7rem;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .about-image::before {
+            content: '👨‍🍳';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            transform: rotate(-20deg);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+        
+        .about-text p:first-child {
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        /* --- Servicios --- */
+        .services {
+             background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(var(--color-primary), 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-display);
+            color: var(--color-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .service-card p {
+            color: var(--color-text);
+        }
+
+        /* --- Contacto --- */
+        .contact {
+            background: linear-gradient(135deg, var(--color-dark) 0%, #333 100%);
+            color: white;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-light);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--color-dark);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 180px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--color-primary);
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:hover {
+            background: var(--color-secondary);
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-light);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- Animaciones --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Media Queries (Responsivo) --- */
+        @media (max-width: 900px) {
+             .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.4rem;
+            }
+            
+            .section {
+                 padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px; /* Ajustar por la altura del header */
+                flex-direction: column;
+                background: var(--color-dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.4s ease-in-out;
+                padding: 2rem 0;
+                box-shadow: 0 8px 10px rgba(0,0,0,0.2);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .nav-links a::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .menu-toggle {
+                display: flex;
+                flex-direction: column;
+                cursor: pointer;
+                padding: 10px;
+            }
+
+            .menu-toggle span {
+                width: 28px;
+                height: 3px;
+                background: white;
+                margin: 4px 0;
+                transition: 0.4s;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo"><span class="icon">🍴</span> Chef Gourmet</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#about">Sobre Mí</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Sabor. Arte. Exclusividad.</h1>
+            <p>Transformando tus eventos en **experiencias culinarias memorables**.</p>
+            <a href="#contacto" class="btn">Reserva tu Experiencia</a>
+        </div>
+    </section>
+
+    <section id="about" class="about section">
+        <h2 class="section-title">Chef de Pasión</h2>
+        <p class="section-subtitle">Más de una década perfeccionando el arte de la gastronomía personal.</p>
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <p>
+                    Con más de 15 años de experiencia en la alta cocina internacional, mi nombre es un sello de garantía para la excelencia gastronómica en eventos privados.
+                </p>
+                <p>
+                    Me especializo en diseñar **menús a medida** que reflejan no solo tus gustos, sino también la esencia de tu celebración. Mi filosofía se centra en la **frescura, la sostenibilidad** y la innovación, asegurando que cada ingrediente cuente una historia de calidad.
+                </p>
+                 <p style="color: var(--color-primary); font-style: italic; font-weight: 600;">
+                    Mi compromiso es ofrecerte un servicio impecable, discreto y altamente personalizado, llevando la elegancia de un restaurante Michelin a tu propio espacio.
+                </p>
+                <a href="#servicios" class="btn" style="margin-top: 1rem; border: 2px solid var(--color-primary); background: transparent; color: var(--color-primary);">Ver mis Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="services section">
+        <h2 class="section-title">Tu Evento. Mi Cocina.</h2>
+        <p class="section-subtitle">Opciones de servicio diseñadas para superar tus expectativas.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Cenas Íntimas</h3>
+                <p>Menús degustación de 3 a 7 tiempos para celebraciones románticas, aniversarios y reuniones exclusivas.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🥂</div>
+                <h3>Eventos Premium</h3>
+                <p>Servicio completo de catering y staff para bodas de lujo, galas corporativas y grandes recepciones.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔪</div>
+                <h3>Talleres Privados</h3>
+                <p>Clases magistrales interactivas en tu cocina, perfectas para *team building* o aficionados serios a la cocina.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Asesoría y Consultoría</h3>
+                <p>Diseño de dietas personalizadas y planificación semanal de comidas (Meal Prep) de alta cocina.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact section">
+        <h2 class="section-title">Empecemos a Crear</h2>
+        <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.8);">Cuéntame sobre tu visión y te contactaré personalmente para una consulta.</p>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" required placeholder="Tu nombre y apellido">
+            </div>
+            <div class="form-group">
+                <label>Email de Contacto</label>
+                <input type="email" required placeholder="ejemplo@gourmet.com">
+            </div>
+            <div class="form-group">
+                <label>Fecha Estimada del Evento</label>
+                <input type="date">
+            </div>
+            <div class="form-group">
+                <label>Detalles del Servicio Deseado</label>
+                <textarea required placeholder="¿Es una cena para 8 personas? ¿Un evento corporativo? ¿Qué tipo de cocina te interesa?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Solicitar Cotización</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Chef Gourmet. Diseño Premium por IA. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('¡Gracias! Su solicitud ha sido recibida. Estaremos en contacto en las próximas 24 horas para discutir los detalles.');
+            event.target.reset();
+            
+            // Cerrar menú móvil si está abierto después de enviar formulario (si está en móvil)
+             if (document.getElementById('navLinks').classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+
+        // Cerrar menú móvil al hacer clic en un enlace y scroll suave
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
+                // Cierra el menú en móvil
+                document.getElementById('navLinks').classList.remove('active');
+
+                // Smooth Scroll
+                if (target) {
+                    // Calculamos el desplazamiento teniendo en cuenta la altura del header fijo
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
